@@ -1,0 +1,123 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+select description from product
+--------------
+
+description
+Skates
+Bike
+Socks
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+select distinct city from customer
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+select * from agent order by city
+--------------
+
+agentID	FName	LName	city	comission
+50	Michael	Bian	Aurora	100
+33	David	Letterman	Bedrock	100
+11	Regis	Philbin	Boston	33
+22	Courtney	Cox	New York	25
+12	Rosie	Cox	Ottawa	50
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+select FName,Lname from customer where city="Springfield"
+--------------
+
+FName	Lname
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+select customer.LName from customer, agent where agent.FName = "Regis" AND customer.aID=agent.agentID
+--------------
+
+LName
+Rubble
+Flintstone
+--------------
+select description from product where description like '%pad%' or description like '%Pad%'
+--------------
+
+description
+Elbow pads
+Knee Pads
+--------------
+select LName, description, quantityPurchased from customer, product, purchase where purchase.custID=customer.customerID AND purchase.prodID = product.productID
+--------------
+
+LName	description	quantityPurchased
+Griffens	Elbow pads	19
+Flintstone	Elbow pads	2
+Flintstone	Knee Pads	2
+Simpson	Socks	14
+Simpson	Elbow pads	10
+Simpson	Helmet	20
+Bob	Socks	5
+Bob	Elbow pads	5
+Bob	Knee Pads	5
+Bob	Helmet	5
+--------------
+select SUM(quantityPurchased) AS "Homer's Total Purchases" from purchase, customer where purchase.custID = customer.customerID AND customer.FName = "Homer"
+--------------
+
+Homer's Total Purchases
+44
+--------------
+select FName, LName, SUM(quantityPurchased) AS "Total Purchases" from purchase, customer where purchase.custID = customer.customerID group by customer.customerID
+--------------
+
+FName	LName	Total Purchases
+Peter	Griffens	19
+Fred	Flintstone	4
+Homer	Simpson	44
+Sideshow	Bob	20
+--------------
+select distinct description, quantity from product, purchase where product.productID NOT IN (select prodID from purchase)
+--------------
+
+description	quantity
+Skates	100
+Bike	200
+Roller Blades	89
+--------------
+select agent.FName, agent.LName, customer.FName, customer.LName from agent, customer where agent.city = customer.city
+--------------
+
+FName	LName	FName	LName
+Regis	Philbin	Barney	Rubble
+Hugh	Grant	Monty	Burns
+Regis	Philbin	Fred	Flintstone
+Hugh	Grant	Homer	Simpson
+Hugh	Grant	Sideshow	Bob
+--------------
+select sum(quantitypurchased) AS "Knee Pads Purchased" from purchase, product where product.description ="Knee Pads" AND product.productID = purchase.prodID
+--------------
+
+Knee Pads Purchased
+7
+--------------
+select description from product, (select prodID, COUNT(*) AS number from purchase group by prodID) temp where product.productID = temp.prodID AND temp.number > 3
+--------------
+
+description
+Elbow pads
+--------------
+select agent.FName, agent.LName from product, purchase, customer, agent where product.description = "Knee Pads" AND purchase.prodID = product.productID AND purchase.custID = customer.customerID AND customer.aID = agent.agentID
+--------------
+
+FName	LName
+Regis	Philbin
+Rosie	ODonnell

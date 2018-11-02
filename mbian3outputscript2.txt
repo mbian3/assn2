@@ -1,0 +1,333 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE product 
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+--------------
+
+--------------
+insert into product values (66, "Elbow pads", 14.25, 120)
+--------------
+
+--------------
+insert into product values (01, "Skates", 20.00, 100)
+--------------
+
+--------------
+insert into agent values (99, "Hugh", "Grant", "Springfield", 16)
+--------------
+
+--------------
+insert into agent values (22, "Courtney", "Cox", "New York", 25)
+--------------
+
+--------------
+insert into agent values (66, "Rosie", "ODonnell", "Ottawa", 100)
+--------------
+
+--------------
+insert into agent values (33, "David", "Letterman", "Bedrock", 100)
+--------------
+
+--------------
+insert into agent values (11, "Regis", "Philbin", "Boston", 33)
+--------------
+
+--------------
+insert into agent values (12, "Rosie", "Cox", "Ottawa", 50)
+--------------
+
+--------------
+insert into agent values (50, "Michael", "Bian", "Aurora", 100)
+--------------
+
+--------------
+insert into customer values (21, "Homer", "Simpson", "Springfield", "686-8956", NULL)
+--------------
+
+--------------
+insert into customer values (31, "Sideshow", "Bob", "Springfield", "686-5555", NULL)
+--------------
+
+--------------
+insert into customer values (12, "Monty", "Burns", "Springfield", "789-0000", NULL)
+--------------
+
+--------------
+insert into customer values (15, "Fred", "Flintstone", "Bedrock", "777-2345", NULL)
+--------------
+
+--------------
+insert into customer values (13, "Super", "Man", "Kypto", "888-1234", NULL)
+--------------
+
+--------------
+insert into customer values (10, "Barney", "Rubble", "Bedrock", "777-1234", NULL)
+--------------
+
+--------------
+insert into customer values (14, "Peter", "Griffens", "Providence", "987-4567", NULL)
+--------------
+
+--------------
+select customerID from customer where Fname = "Homer" into @Var1
+--------------
+
+--------------
+select productID from product where description = "Helmet" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 20)
+--------------
+
+--------------
+select productID from product where description = "Socks" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 14)
+--------------
+
+--------------
+select productID from product where description = "Elbow Pads" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 10)
+--------------
+
+--------------
+select customerID from customer where Fname = "Sideshow" into @Var1
+--------------
+
+--------------
+select productID from product where description = "Helmet" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 1)
+--------------
+
+--------------
+select productID from product where description = "Socks" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 2)
+--------------
+
+--------------
+select productID from product where description = "Knee Pads" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 4)
+--------------
+
+--------------
+select productID from product where description = "Elbow Pads" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 2)
+--------------
+
+--------------
+select customerID from customer where Fname = "Fred" into @Var1
+--------------
+
+--------------
+select productID from product where description = "Elbow Pads" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 2)
+--------------
+
+--------------
+select productID from product where description = "Knee Pads" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 2)
+--------------
+
+--------------
+select customerID from customer where Fname = "Peter" into @Var1
+--------------
+
+--------------
+select productID from product where description = "Elbow Pads" into @Var2
+--------------
+
+--------------
+insert into purchase VALUES (@Var1, @Var2, 19)
+--------------
+
+--------------
+select agentID from agent where FName ="Hugh" AND LName ="Grant" into @Var1
+--------------
+
+--------------
+update customer set aID = @Var1 where FName = "Homer"
+--------------
+
+--------------
+update customer	set aID	= @Var1	where FName = "Monty"
+--------------
+
+--------------
+update customer	set aID	= @Var1	where FName = "Peter"
+--------------
+
+--------------
+select agentID from agent where	FName ="David" AND LName="Letterman" into @Var1
+--------------
+
+--------------
+update customer	set aID	= @Var1	where FName = "Super"
+--------------
+
+--------------
+select agentID from agent where	FName ="Regis" AND LName="Philbin" into @Var1
+--------------
+
+--------------
+update customer	set aID	= @Var1	where FName = "Barney"
+--------------
+
+--------------
+update customer set aID = @Var1 where FName = "Fred"
+--------------
+
+--------------
+select agentID from agent where FName ="Rosie" AND LName="ODonnell"  into @Var1
+--------------
+
+--------------
+update customer set aID = @Var1 where FName = "Sideshow"
+--------------
+
+--------------
+select * from agent
+--------------
+
+agentID	FName	LName	city	comission
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+33	David	Letterman	Bedrock	100
+50	Michael	Bian	Aurora	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+select * from customer
+--------------
+
+customerID	FName	LName	city	phone	aID
+10	Barney	Rubble	Bedrock	777-1234	11
+12	Monty	Burns	Springfield	789-0000	99
+13	Super	Man	Kypto	888-1234	33
+14	Peter	Griffens	Providence	987-4567	99
+15	Fred	Flintstone	Bedrock	777-2345	11
+21	Homer	Simpson	Springfield	686-8956	99
+31	Sideshow	Bob	Springfield	686-5555	66
+--------------
+select * from product
+--------------
+
+productID	description	cost	quantity
+1	Skates	20	100
+11	Bike	150	200
+12	Socks	2	100
+66	Elbow pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75	89
+99	Helmet	29	30
+--------------
+select * from purchase
+--------------
+
+custID	prodID	quantityPurchased
+14	66	19
+15	66	2
+15	78	2
+21	12	14
+21	66	10
+21	99	20
+31	12	2
+31	66	2
+31	78	4
+31	99	1
+--------------
+update customer set FName = "Wonder", LName = "Woman" where FName="Super" AND LName="Man"
+--------------
+
+--------------
+select customerID from customer where Fname = "Sideshow" into @Var1
+--------------
+
+--------------
+update purchase set quantityPurchased = 5 where custID = @Var1
+--------------
+
+--------------
+select agentID from agent where Fname = "Regis" into @Var1
+--------------
+
+--------------
+update customer set city="Boston" where aID = @Var1
+--------------
+
+--------------
+select * from agent
+--------------
+
+agentID	FName	LName	city	comission
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+33	David	Letterman	Bedrock	100
+50	Michael	Bian	Aurora	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+select * from customer
+--------------
+
+customerID	FName	LName	city	phone	aID
+10	Barney	Rubble	Boston	777-1234	11
+12	Monty	Burns	Springfield	789-0000	99
+13	Wonder	Woman	Kypto	888-1234	33
+14	Peter	Griffens	Providence	987-4567	99
+15	Fred	Flintstone	Boston	777-2345	11
+21	Homer	Simpson	Springfield	686-8956	99
+31	Sideshow	Bob	Springfield	686-5555	66
+--------------
+select * from product
+--------------
+
+productID	description	cost	quantity
+1	Skates	20	100
+11	Bike	150	200
+12	Socks	2	100
+66	Elbow pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75	89
+99	Helmet	29	30
+--------------
+select * from purchase
+--------------
+
+custID	prodID	quantityPurchased
+14	66	19
+15	66	2
+15	78	2
+21	12	14
+21	66	10
+21	99	20
+31	12	5
+31	66	5
+31	78	5
+31	99	5

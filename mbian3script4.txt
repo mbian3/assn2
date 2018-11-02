@@ -1,0 +1,15 @@
+use mbian3assign2db;
+select * from agent;
+select * from customer;
+select * from product;
+select * from purchase;
+CREATE VIEW first AS select FName,LName,custID,prodID,quantityPurchased from customer LEFT OUTER JOIN purchase ON customer.customerID=purchase.custID;
+CREATE VIEW second AS select FName,LName, description, quantityPurchased, cost, quantityPurchased*cost as 'Total Cost' from product RIGHT OUTER JOIN first ON product.productID = first.prodID;
+CREATE VIEW receipt AS select * from second order by LName;
+Select * from receipt;
+select * from receipt where `Total Cost` > 100.0;
+delete from product where description = "skates";
+select * from product;
+delete from agent where city = "Springfield";
+-- the for agents who are from Springfield were not deleted because these agents are referenced as a foreign key in customer.aID.
+

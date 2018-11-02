@@ -1,0 +1,68 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+show databases
+--------------
+
+Database
+information_schema
+mbian3assign2db
+mysql
+performance_schema
+tester
+--------------
+drop database if exists mbian3assign2db
+--------------
+
+--------------
+create database  mbian3assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+show tables
+--------------
+
+--------------
+create table agent (agentID varchar(2), FName varchar(30), LName varchar(30), city varchar(15), comission int, primary key (agentID))
+--------------
+
+--------------
+create table customer (customerID varchar(2), FName varchar(30), LName varchar(30), city varchar(15), phone varchar(15), aID varchar(2), primary key(customerID), foreign key (aID) REFERENCES agent(agentID))
+--------------
+
+--------------
+create table product (productID varchar(2), description varchar(20), cost float, quantity int, primary key (productID))
+--------------
+
+--------------
+create table purchase (custID varchar(2), prodID varchar(20), quantityPurchased int, primary key (custID, prodID), foreign key (custID) REFERENCES customer (customerID), foreign key (prodID) REFERENCES product (productID))
+--------------
+
+--------------
+show tables
+--------------
+
+Tables_in_mbian3assign2db
+agent
+customer
+product
+purchase

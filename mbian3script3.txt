@@ -1,0 +1,29 @@
+use mbian3assign2db;
+-- Query 1
+select description from product;
+-- Query 2
+select distinct city from customer;
+-- Query 3;
+select * from agent order by city;
+-- Query 4
+select FName,Lname from customer where city="Springfield";
+-- Query 5
+select customer.LName from customer, agent where agent.FName = "Regis" AND customer.aID=agent.agentID;
+-- Query 6
+select description from product where description like '%pad%' or description like '%Pad%';
+-- Query 7
+select LName, description, quantityPurchased from customer, product, purchase where purchase.custID=customer.customerID AND purchase.prodID = product.productID; 
+-- Query 8
+select SUM(quantityPurchased) AS "Homer's Total Purchases" from purchase, customer where purchase.custID = customer.customerID AND customer.FName = "Homer";
+-- Query 9
+select FName, LName, SUM(quantityPurchased) AS "Total Purchases" from purchase, customer where purchase.custID = customer.customerID group by customer.customerID;
+-- Query 10
+select distinct description, quantity from product, purchase where product.productID NOT IN (select prodID from purchase);
+-- Query 12
+select agent.FName, agent.LName, customer.FName, customer.LName from agent, customer where agent.city = customer.city;
+-- Query 13
+select sum(quantitypurchased) AS "Knee Pads Purchased" from purchase, product where product.description ="Knee Pads" AND product.productID = purchase.prodID;
+-- Query 14
+select description from product, (select prodID, COUNT(*) AS number from purchase group by prodID) temp where product.productID = temp.prodID AND temp.number > 3;
+-- Query 15
+select agent.FName, agent.LName from product, purchase, customer, agent where product.description = "Knee Pads" AND purchase.prodID = product.productID AND purchase.custID = customer.customerID AND customer.aID = agent.agentID; 
